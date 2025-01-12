@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ChirpResource;
 use App\Models\Chirp;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ChirpController extends Controller
@@ -10,9 +12,12 @@ class ChirpController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return new JsonResponse([
+            'success' => true,
+            'data' => ChirpResource::collection(Chirp::get()),
+        ]);
     }
 
     /**
